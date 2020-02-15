@@ -24,6 +24,9 @@ public class SecurityUser {
 	
 	private String lastName;
 	
+	@OneToMany (mappedBy ="user" , fetch = FetchType.LAZY, cascade = CascadeType.REFRESH)
+	private Set<Comment> comments = new HashSet<Comment>();
+	
 	@OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.REFRESH)
 	private Set<SecurityUserAuthority> userAuthorities = new HashSet<SecurityUserAuthority>();
 
@@ -74,4 +77,13 @@ public class SecurityUser {
 	public void setUserAuthorities(Set<SecurityUserAuthority> userAuthorities) {
 		this.userAuthorities = userAuthorities;
 	}
+
+	public Set<Comment> getComments() {
+		return comments;
+	}
+
+	public void setComments(Set<Comment> comments) {
+		this.comments = comments;
+	}
+	
 }
