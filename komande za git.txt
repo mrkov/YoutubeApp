@@ -1,0 +1,21 @@
+﻿
+Za dodavanje u trenutnoj grani:
+add .
+commit -m "neka poruka"
+git push
+
+git pull - dobavljanje izmena
+
+git branch - pregled svih grana
+
+git branch imeGrane - kreiranje nove grane
+
+git checkout imeGrane - prelazak na granu sa datim imenom
+
+iz sporedne grane git push za slanje grane na github
+
+nakon git push iz sporedne grane, na github-u se pojavljuje git pull request
+ za spajanje sa glavnom granom gde se ostavlja komentar sta je uradjeno
+
+
+
