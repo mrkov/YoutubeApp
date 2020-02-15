@@ -25,6 +25,12 @@ public class SecurityUser {
 	private String firstName;
 
 	private String lastName;
+
+	
+	@OneToMany (mappedBy ="user" , fetch = FetchType.LAZY, cascade = CascadeType.REFRESH)
+	private Set<Comment> comments = new HashSet<Comment>();
+	
+
 	@OneToMany(mappedBy = "video", cascade = CascadeType.REFRESH)
 	private List<LikeDislike> videoLikes = new ArrayList<>();
 	@OneToMany(mappedBy = "comment", cascade = CascadeType.REFRESH)
@@ -80,4 +86,13 @@ public class SecurityUser {
 	public void setUserAuthorities(Set<SecurityUserAuthority> userAuthorities) {
 		this.userAuthorities = userAuthorities;
 	}
+
+	public Set<Comment> getComments() {
+		return comments;
+	}
+
+	public void setComments(Set<Comment> comments) {
+		this.comments = comments;
+	}
+	
 }
