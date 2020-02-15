@@ -15,7 +15,15 @@ git checkout imeGrane - prelazak na granu sa datim imenom
 iz sporedne grane git push za slanje grane na github
 
 nakon git push iz sporedne grane, na github-u se pojavljuje git pull request
- za spajanje sa glavnom granom gde se ostavlja komentar sta je uradjeno
+ za spajanje sa glavnom granom (merge pull request) gde se ostavlja komentar sta je uradjeno
+
+git merge master(ili bilo koja grana koja je iznad) - spajanje sa glavnom granom ili granom iznad
+
+
+PROVERA branch: grana
+
+
+provera dva za merge 
 
 
 
