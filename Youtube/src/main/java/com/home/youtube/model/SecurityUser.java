@@ -1,6 +1,8 @@
 package com.home.youtube.model;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -15,15 +17,19 @@ public class SecurityUser {
 	@Id
 	@GeneratedValue
 	private Long id;
-	
+
 	private String username;
-	
+
 	private String password;
-	
+
 	private String firstName;
-	
+
 	private String lastName;
-	
+	@OneToMany(mappedBy = "video", cascade = CascadeType.REFRESH)
+	private List<LikeDislike> videoLikes = new ArrayList<>();
+	@OneToMany(mappedBy = "comment", cascade = CascadeType.REFRESH)
+	private List<LikeDislike> commentLikes = new ArrayList<>();
+
 	@OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.REFRESH)
 	private Set<SecurityUserAuthority> userAuthorities = new HashSet<SecurityUserAuthority>();
 
@@ -50,7 +56,7 @@ public class SecurityUser {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	
+
 	public String getFirstName() {
 		return firstName;
 	}
