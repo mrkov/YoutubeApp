@@ -23,4 +23,7 @@ git merge master(ili bilo koja grana koja je iznad) - spajanje sa glavnom granom
 PROVERA branch: grana
 
 
+provera dva za merge 
+
+
 
