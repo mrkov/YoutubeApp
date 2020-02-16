@@ -36,6 +36,8 @@ public class SecurityUser {
 	private LocalDate registrationDate;
 	private boolean blocked;
 	
+	@OneToMany (mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.REFRESH)
+	private Set<Video> videos = new HashSet<Video>();
 	
 	@OneToMany(mappedBy = "username", cascade = CascadeType.REFRESH)
 	private Map<Long, SecurityUser> subscribers = new HashMap<>();
@@ -154,5 +156,22 @@ public class SecurityUser {
 	public void setBlocked(boolean blocked) {
 		this.blocked = blocked;
 	}
+
+	public Set<Video> getVideos() {
+		return videos;
+	}
+
+	public void setVideos(Set<Video> videos) {
+		this.videos = videos;
+	}
+
+	public Map<Long, SecurityUser> getSubscribers() {
+		return subscribers;
+	}
+
+	public void setSubscribers(Map<Long, SecurityUser> subscribers) {
+		this.subscribers = subscribers;
+	}
+	
 
 }
