@@ -36,8 +36,8 @@ public class SecurityUser {
 	private LocalDate registrationDate;
 	private boolean blocked;
 	
-	// ne znam koju anotaciju da stavim mozda many to many
-	//@ManyToMany(mappedBy = "subscribers", cascade = CascadeType.REFRESH)
+	
+	@OneToMany(mappedBy = "username", cascade = CascadeType.REFRESH)
 	private Map<Long, SecurityUser> subscribers = new HashMap<>();
 
 	@OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.REFRESH)
@@ -121,6 +121,38 @@ public class SecurityUser {
 
 	public void setCommentLikes(List<LikeDislike> commentLikes) {
 		this.commentLikes = commentLikes;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getChanelDescription() {
+		return chanelDescription;
+	}
+
+	public void setChanelDescription(String chanelDescription) {
+		this.chanelDescription = chanelDescription;
+	}
+
+	public LocalDate getRegistrationDate() {
+		return registrationDate;
+	}
+
+	public void setRegistrationDate(LocalDate registrationDate) {
+		this.registrationDate = registrationDate;
+	}
+
+	public boolean isBlocked() {
+		return blocked;
+	}
+
+	public void setBlocked(boolean blocked) {
+		this.blocked = blocked;
 	}
 
 }
