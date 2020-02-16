@@ -1,15 +1,20 @@
 package com.home.youtube.model;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
 @Entity
@@ -17,7 +22,7 @@ public class SecurityUser {
 	@Id
 	@GeneratedValue
 	private Long id;
-
+	@Column(unique = true)
 	private String username;
 
 	private String password;
@@ -25,6 +30,15 @@ public class SecurityUser {
 	private String firstName;
 
 	private String lastName;
+	
+	private String email;
+	private String chanelDescription;
+	private LocalDate registrationDate;
+	private boolean blocked;
+	
+	// ne znam koju anotaciju da stavim mozda many to many
+	//@ManyToMany(mappedBy = "subscribers", cascade = CascadeType.REFRESH)
+	private Map<Long, SecurityUser> subscribers = new HashMap<>();
 
 	@OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.REFRESH)
 	private Set<Comment> comments = new HashSet<Comment>();
