@@ -21,7 +21,7 @@ public class VideoController {
 	@Autowired
 	VideoService videoService;
 
-	@GetMapping
+	@GetMapping (value = "api/videos")
 	ResponseEntity<List<VideoDTO>> getVideos(@PathVariable Long userId, Pageable page) {
 		List<VideoDTO> retVal = videoService.findAll(userId, page).stream().map(VideoDTO::new)
 				.collect(Collectors.toList());
