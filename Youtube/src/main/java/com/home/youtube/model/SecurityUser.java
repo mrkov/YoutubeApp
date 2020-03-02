@@ -2,10 +2,8 @@ package com.home.youtube.model;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -14,6 +12,8 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
@@ -30,15 +30,17 @@ public class SecurityUser {
 	private String firstName;
 
 	private String lastName;
-	
+
 	private String email;
 	private String chanelDescription;
 	private LocalDate registrationDate;
-	private boolean blocked;
+	private boolean isBlocked;
+
+	@ManyToMany(cascade = CascadeType.REFRESH)
+	private List<SecurityUser> subscribers = new ArrayList<SecurityUser>();
 	
-	// ne znam koju anotaciju da stavim mozda many to many
-	//@ManyToMany(mappedBy = "subscribers", cascade = CascadeType.REFRESH)
-	private Map<Long, SecurityUser> subscribers = new HashMap<>();
+	@ManyToMany(mappedBy="subscribers",cascade = CascadeType.REFRESH)
+	private List<SecurityUser> subscribedFor = new ArrayList<SecurityUser>();
 
 	@OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.REFRESH)
 	private Set<Comment> comments = new HashSet<Comment>();
@@ -121,6 +123,54 @@ public class SecurityUser {
 
 	public void setCommentLikes(List<LikeDislike> commentLikes) {
 		this.commentLikes = commentLikes;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getChanelDescription() {
+		return chanelDescription;
+	}
+
+	public void setChanelDescription(String chanelDescription) {
+		this.chanelDescription = chanelDescription;
+	}
+
+	public LocalDate getRegistrationDate() {
+		return registrationDate;
+	}
+
+	public void setRegistrationDate(LocalDate registrationDate) {
+		this.registrationDate = registrationDate;
+	}
+
+	public boolean isBlocked() {
+		return isBlocked;
+	}
+
+	public void setBlocked(boolean isBlocked) {
+		this.isBlocked = isBlocked;
+	}
+
+	public List<SecurityUser> getSubscribers() {
+		return subscribers;
+	}
+
+	public void setSubscribers(List<SecurityUser> subscribers) {
+		this.subscribers = subscribers;
+	}
+
+	public List<SecurityUser> getSubscribedFor() {
+		return subscribedFor;
+	}
+
+	public void setSubscribedFor(List<SecurityUser> subscribedFor) {
+		this.subscribedFor = subscribedFor;
 	}
 
 }
