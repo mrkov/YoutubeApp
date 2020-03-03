@@ -2,10 +2,8 @@ package com.home.youtube.model;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -30,17 +28,21 @@ public class SecurityUser {
 	private String firstName;
 
 	private String lastName;
-	
+
 	private String email;
 	private String chanelDescription;
 	private LocalDate registrationDate;
-	private boolean blocked;
+	private boolean isBlocked;
+
+	@ManyToMany(cascade = CascadeType.REFRESH)
+	private List<SecurityUser> subscribers = new ArrayList<SecurityUser>();
 	
+	@ManyToMany(mappedBy="subscribers",cascade = CascadeType.REFRESH)
+	private List<SecurityUser> subscribedFor = new ArrayList<SecurityUser>();
+
 	@OneToMany (mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.REFRESH)
 	private Set<Video> videos = new HashSet<Video>();
 	
-	@OneToMany(mappedBy = "username", cascade = CascadeType.REFRESH)
-	private Map<Long, SecurityUser> subscribers = new HashMap<>();
 
 	@OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.REFRESH)
 	private Set<Comment> comments = new HashSet<Comment>();
@@ -150,28 +152,27 @@ public class SecurityUser {
 	}
 
 	public boolean isBlocked() {
-		return blocked;
+		return isBlocked;
 	}
 
-	public void setBlocked(boolean blocked) {
-		this.blocked = blocked;
+	public void setBlocked(boolean isBlocked) {
+		this.isBlocked = isBlocked;
 	}
 
-	public Set<Video> getVideos() {
-		return videos;
-	}
-
-	public void setVideos(Set<Video> videos) {
-		this.videos = videos;
-	}
-
-	public Map<Long, SecurityUser> getSubscribers() {
+	public List<SecurityUser> getSubscribers() {
 		return subscribers;
 	}
 
-	public void setSubscribers(Map<Long, SecurityUser> subscribers) {
+	public void setSubscribers(List<SecurityUser> subscribers) {
 		this.subscribers = subscribers;
 	}
-	
+
+	public List<SecurityUser> getSubscribedFor() {
+		return subscribedFor;
+	}
+
+	public void setSubscribedFor(List<SecurityUser> subscribedFor) {
+		this.subscribedFor = subscribedFor;
+	}
 
 }

@@ -3,36 +3,28 @@ package com.home.youtube.model;
 import java.time.LocalDate;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
-import com.fasterxml.jackson.annotation.JsonAutoDetect.Visibility;
-
 @Entity
 public class Video {
-	
 	
 	@Id
 	@GeneratedValue
 	private Long id;
-	
-	private String url;
-	
-	private String description;
-	
+	private String videoUrl;
+	private String imgUrl;
+	private String descrtiption;
+	private boolean isAllowedToComment;
+	private boolean isAllowedToSeeRating;
+	private boolean isBlocked;
 	private Visibility visibility;
-	
-	private int numberOfViews;
-	
-	private LocalDate creationDate;
-	
-	@ManyToOne
-	private SecurityUser user;
-
-	public Video () {
-		
-	}
+	private Long views;
+	private LocalDate dateCreated;
+	@ManyToOne(fetch = FetchType.EAGER)
+	private SecurityUser owner;
 
 	public Long getId() {
 		return id;
@@ -42,20 +34,52 @@ public class Video {
 		this.id = id;
 	}
 
-	public String getUrl() {
-		return url;
+	public String getVideoUrl() {
+		return videoUrl;
 	}
 
-	public void setUrl(String url) {
-		this.url = url;
+	public void setVideoUrl(String videoUrl) {
+		this.videoUrl = videoUrl;
 	}
 
-	public String getDescription() {
-		return description;
+	public String getImgUrl() {
+		return imgUrl;
 	}
 
-	public void setDescription(String description) {
-		this.description = description;
+	public void setImgUrl(String imgUrl) {
+		this.imgUrl = imgUrl;
+	}
+
+	public String getDescrtiption() {
+		return descrtiption;
+	}
+
+	public void setDescrtiption(String descrtiption) {
+		this.descrtiption = descrtiption;
+	}
+
+	public boolean isAllowedToComment() {
+		return isAllowedToComment;
+	}
+
+	public void setAllowedToComment(boolean isAllowedToComment) {
+		this.isAllowedToComment = isAllowedToComment;
+	}
+
+	public boolean isAllowedToSeeRating() {
+		return isAllowedToSeeRating;
+	}
+
+	public void setAllowedToSeeRating(boolean isAllowedToSeeRating) {
+		this.isAllowedToSeeRating = isAllowedToSeeRating;
+	}
+
+	public boolean isBlocked() {
+		return isBlocked;
+	}
+
+	public void setBlocked(boolean isBlocked) {
+		this.isBlocked = isBlocked;
 	}
 
 	public Visibility getVisibility() {
@@ -66,29 +90,30 @@ public class Video {
 		this.visibility = visibility;
 	}
 
-	public int getNumberOfViews() {
-		return numberOfViews;
+	public Long getViews() {
+		return views;
 	}
 
-	public void setNumberOfViews(int numberOfViews) {
-		this.numberOfViews = numberOfViews;
+	public void setViews(Long views) {
+		this.views = views;
 	}
 
-	public LocalDate getCreationDate() {
-		return creationDate;
+	public LocalDate getDateCreated() {
+		return dateCreated;
 	}
 
-	public void setCreationDate(LocalDate creationDate) {
-		this.creationDate = creationDate;
+	public void setDateCreated(LocalDate dateCreated) {
+		this.dateCreated = dateCreated;
 	}
 
-	public SecurityUser getUser() {
-		return user;
+	public SecurityUser getOwner() {
+		return owner;
 	}
 
-	public void setUser(SecurityUser user) {
-		this.user = user;
+	public void setOwner(SecurityUser owner) {
+		this.owner = owner;
 	}
+
 	
 	
 	
