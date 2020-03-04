@@ -23,7 +23,7 @@ public class CommentServiceImpl implements CommentService {
 
 	@Override
 	public Comment findOne(Long id) {
-		// TODO Auto-generated method stub
+		if(id == null) return null;
 		return commentRepository.getOne(id);
 	}
 

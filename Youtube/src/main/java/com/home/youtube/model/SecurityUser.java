@@ -40,7 +40,7 @@ public class SecurityUser {
 	@ManyToMany(mappedBy="subscribers",cascade = CascadeType.REFRESH)
 	private List<SecurityUser> subscribedFor = new ArrayList<SecurityUser>();
 
-	@OneToMany (mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.REFRESH)
+	@OneToMany (mappedBy = "owner", fetch = FetchType.LAZY, cascade = CascadeType.REFRESH)
 	private Set<Video> videos = new HashSet<Video>();
 	
 
