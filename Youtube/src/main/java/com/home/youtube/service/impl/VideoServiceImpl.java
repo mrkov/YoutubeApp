@@ -17,13 +17,11 @@ public class VideoServiceImpl implements VideoService {
 
 	@Override
 	public List<Video> findAll() {
-		// TODO Auto-generated method stub
 		return videoRepository.findAll();
 	}
 
 	@Override
 	public Video findOne(Long id) {
-		// TODO Auto-generated method stub
 		return videoRepository.getOne(id);
 	}
 

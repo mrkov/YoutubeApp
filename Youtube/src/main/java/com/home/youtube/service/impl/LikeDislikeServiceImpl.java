@@ -17,13 +17,11 @@ public class LikeDislikeServiceImpl implements LikeDislikeService{
 
 	@Override
 	public List<LikeDislike> findAll() {
-		// TODO Auto-generated method stub
 		return likeRepository.findAll();
 	}
 
 	@Override
 	public LikeDislike findOne(Long id) {
-		// TODO Auto-generated method stub
 		return likeRepository.getOne(id);
 	}
 
