@@ -3,13 +3,23 @@ package com.home.youtube.model;
 import java.time.LocalDate;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
+import org.hibernate.annotations.NotFound;
+import org.hibernate.annotations.NotFoundAction;
+
 @Entity
 public class Comment {
 	
+	@Override
+	public String toString() {
+		return "Comment [id=" + id + ", content=" + content + ", date=" + date + ", user=" + user + ", video=" + video
+				+ "]";
+	}
+
 	@Id
 	@GeneratedValue
 	private Long id;
@@ -18,10 +28,12 @@ public class Comment {
 	
 	private LocalDate date;
 	
-	@ManyToOne 
+	@ManyToOne(fetch = FetchType.LAZY) 
+	@NotFound(action = NotFoundAction.IGNORE)
 	private SecurityUser user;
 	
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.LAZY)
+	@NotFound(action = NotFoundAction.IGNORE)
 	private Video video;
 	
 	public Comment () {

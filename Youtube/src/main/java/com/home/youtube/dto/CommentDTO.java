@@ -15,7 +15,9 @@ public class CommentDTO {
 		this.id = comment.getId();
 		this.content = comment.getContent();
 		this.date = comment.getDate().toString();
+		if(comment.getUser() != null)
 		this.userId = comment.getUser().getId();
+		if(comment.getVideo() != null)
 		this.videoId = comment.getVideo().getId();
 	}
 	
