@@ -16,28 +16,29 @@ import com.home.youtube.model.Comment;
 import com.home.youtube.service.CommentService;
 
 @RestController
-@RequestMapping(value = "/api/comments")
+@RequestMapping(value = "/api/videos/comments")
 public class CommentController {
 
 	@Autowired
 	CommentService commentService;
 	
-	//findOne uopšte ne radi, baca izuzetke
 	@GetMapping(value = "/{id}")
 	ResponseEntity<CommentDTO> findOne(@PathVariable Long id) {
+		Comment found = null;
 		
-		Comment found = commentService.findOne(id);
+		found = commentService.findOne(id);
 		
 		if (found == null) {
-			System.out.println("Id je: " + id);
+			System.out.println("USAO U IF");
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}else {
+			System.out.println("USAO U ELSE");
+			return new ResponseEntity<>(new CommentDTO(found), HttpStatus.OK);
 		}
-		CommentDTO dto = new CommentDTO(found);
 
-		return new ResponseEntity<>(dto, HttpStatus.OK);
 	}
 	
-	
+	//Treba da se implementira findByVideo, ali još uvek ne postoji controller za video
 	@GetMapping
 	ResponseEntity<List<CommentDTO>> findAll() {
 		

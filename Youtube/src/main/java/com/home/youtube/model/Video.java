@@ -1,12 +1,16 @@
 package com.home.youtube.model;
 
 import java.time.LocalDate;
+import java.util.HashSet;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Video {
@@ -25,6 +29,8 @@ public class Video {
 	private LocalDate dateCreated;
 	@ManyToOne(fetch = FetchType.EAGER)
 	private SecurityUser owner;
+	@OneToMany(mappedBy = "video", fetch = FetchType.LAZY, cascade = CascadeType.REFRESH)
+	private Set<Comment> comments = new HashSet<Comment>();
 
 	public Long getId() {
 		return id;
@@ -112,6 +118,14 @@ public class Video {
 
 	public void setOwner(SecurityUser owner) {
 		this.owner = owner;
+	}
+
+	public Set<Comment> getComments() {
+		return comments;
+	}
+
+	public void setComments(Set<Comment> comments) {
+		this.comments = comments;
 	}
 
 	

@@ -57,7 +57,7 @@ public class LikeDislike {
 		return comment;
 	}
 
-	public void setKomentar(Comment comment) {
+	public void setComment(Comment comment) {
 		this.comment = comment;
 	}
 
